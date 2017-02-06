@@ -1,0 +1,44 @@
+<div class="table-responsive">
+            <table class="table" *ngIf = 'products && products.length'>
+                <thead>
+                    <tr>
+                        <th>
+                          image
+                            <!-- {{showHideImg? "Hide Image"}} -->
+
+                        </th>
+                        <th>Products</th>
+                        <th>Id</th>
+                        <th>Code</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                        <th>5 Star rating</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = 'let product of products | productFilter: username' >
+                    	<td>
+                    		<img
+                    			
+                    			[src] = 'product.imageUrl' 
+                    			[style.width.px] = 'imageWidth'
+                    			[title] = 'product.productName'/>
+                    	</td>
+                    	<td>
+                            <!-- {{product.productName | uppercase }}  -->
+                            <a [routerLink] = "['/products', product.productId, product.productName,product.productCode]">{{product.productName}}</a>
+                        </td>
+                        <td>{{product.productId }}</td>
+                    	<td>{{product.productCode  }}</td>
+                    	<td>{{product.releaseDate}}</td>
+                    	<td>{{product.price | currency: 'USD':true}}</td>
+                    	<td>
+                            <ml-star [rating]= 'product.starRating' (ratingClicked) = 'starRatingClicked($event)'></ml-star>
+                        </td>
+                          <td>{{product.description | lowercase }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+               
